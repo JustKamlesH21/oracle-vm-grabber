@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: "3 * * * *"
   workflow_dispatch:
+    inputs:
+      minutes:
+        description: "Retry window in minutes (hourly runs use 54)"
+        default: "54"
 
 permissions:
   contents: read
@@ -44,6 +48,8 @@ jobs:
 
       - name: Try to launch the VM
         id: grab
+        env:
+          MAX_MINUTES: ${{ github.event.inputs.minutes || '54' }}
         run: |
           set +e
           ./grab.sh
