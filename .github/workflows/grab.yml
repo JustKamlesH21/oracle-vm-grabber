@@ -1,0 +1,66 @@
+# Retry the Oracle Cloud Always Free Ampere VM (VM.Standard.A1.Flex) until Oracle has capacity.
+# Hourly; each run retries for ~54 minutes. Credentials are encrypted repository secrets.
+# On success it opens an issue (GitHub e-mails you) and disables itself. The VM's IP is never logged.
+name: grab oracle vm
+on:
+  schedule:
+    - cron: "3 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  actions: write
+
+concurrency:
+  group: grab
+  cancel-in-progress: false
+
+jobs:
+  grab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OCI CLI
+        run: pipx install --quiet oci-cli && oci --version
+
+      - name: Write credentials from secrets
+        env:
+          OCI_USER: ${{ secrets.OCI_USER }}
+          OCI_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
+          OCI_TENANCY: ${{ secrets.OCI_TENANCY }}
+          OCI_REGION: ${{ secrets.OCI_REGION }}
+          OCI_KEY_PEM: ${{ secrets.OCI_KEY_PEM }}
+          SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+        run: |
+          mkdir -p ~/.oci ~/.ssh && chmod 700 ~/.oci
+          printf '%s\n' "$OCI_KEY_PEM" > ~/.oci/key.pem && chmod 600 ~/.oci/key.pem
+          printf '[DEFAULT]\nuser=%s\nfingerprint=%s\ntenancy=%s\nregion=%s\nkey_file=%s\n' \
+            "$OCI_USER" "$OCI_FINGERPRINT" "$OCI_TENANCY" "$OCI_REGION" "$HOME/.oci/key.pem" > ~/.oci/config
+          chmod 600 ~/.oci/config
+          printf '%s\n' "$SSH_PUBLIC_KEY" > ~/.ssh/vm.pub
+
+      - name: Try to launch the VM
+        id: grab
+        run: |
+          set +e
+          ./grab.sh
+          code=$?
+          if [ "$code" = 2 ]; then echo "No capacity this hour; the next run continues."; exit 0; fi
+          exit "$code"
+
+      - name: Announce and pause
+        if: steps.grab.outputs.created != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ steps.grab.outputs.created }}" = "new" ]; then
+            gh issue create --title "Oracle VM is ready" --body "The Always Free VM **cti-verify** is running.
+
+          Get its IP privately on your Mac (from \`cti-platform/\`): \`./deploy/oracle-grab-vm.sh\` (it finds the VM, saves the IP to deploy/server.env), then run \`./deploy/oracle-wizard.sh\`.
+
+          This workflow has disabled itself."
+          fi
+          gh workflow disable grab.yml
