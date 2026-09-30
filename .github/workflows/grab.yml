@@ -52,9 +52,17 @@ jobs:
           MAX_MINUTES: ${{ github.event.inputs.minutes || '54' }}
         run: |
           set +e
-          ./grab.sh
-          code=$?
-          if [ "$code" = 2 ]; then echo "No capacity this hour; the next run continues."; exit 0; fi
+          ./grab.sh | tee grab.log
+          code=${PIPESTATUS[0]}
+          tries=$(grep -c "attempt " grab.log)
+          case "$code" in
+            0) grep -q "already exists" grab.log \
+                 && echo "### VM already exists: nothing to do" >> "$GITHUB_STEP_SUMMARY" \
+                 || echo "### VM created: check the new issue for next steps" >> "$GITHUB_STEP_SUMMARY" ;;
+            2) echo "### Still waiting: no Oracle capacity this hour ($tries attempts). The next hourly run continues." >> "$GITHUB_STEP_SUMMARY"
+               echo "No capacity this hour; the next run continues."; exit 0 ;;
+            *) echo "### Stopped with an error: open the log of this run" >> "$GITHUB_STEP_SUMMARY" ;;
+          esac
           exit "$code"
 
       - name: Announce and pause
