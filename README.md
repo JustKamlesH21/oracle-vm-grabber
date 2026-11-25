@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/banner.svg" width="100%" alt="Oracle VM Grabber: a GitHub Action that retries the Oracle Cloud Always Free Ampere VM launch every hour until there is capacity.">
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/banner-m.svg"><img src="assets/readme/banner.svg" width="100%" alt="Oracle VM Grabber: a GitHub Action that retries the Oracle Cloud Always Free Ampere VM launch every hour until there is capacity."></picture>
 </p>
 
 <p align="center">
@@ -14,7 +14,7 @@ No credentials, OCIDs or IP addresses are stored in the repository or printed in
 ## How it works
 
 <p align="center">
-  <img src="assets/readme/how-it-works.svg" width="100%" alt="How it works: an hourly schedule runs grab.sh, which retries for about 54 minutes, 50 to 90 seconds apart, to launch a VM.Standard.A1.Flex with 1 OCPU and 6 GB; on success it opens an issue and disables the workflow.">
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/how-it-works-m.svg"><img src="assets/readme/how-it-works.svg" width="100%" alt="How it works: an hourly schedule runs grab.sh, which retries for about 54 minutes, 50 to 90 seconds apart, to launch a VM.Standard.A1.Flex with 1 OCPU and 6 GB; on success it opens an issue and disables the workflow."></picture>
 </p>
 
 | File | What it does |
@@ -49,5 +49,5 @@ To change the VM, add `VM_NAME`, `OCPUS` or `MEMORY_GB` to the `env:` of the "Tr
 No license file has been added yet, so default copyright applies.
 
 <p align="center">
-  <a href="https://github.com/JustKamlesH21"><img src="assets/readme/footer.svg" width="100%" alt="Part of Kamlesh OS. More projects on github.com/JustKamlesH21"></a>
+  <a href="https://github.com/JustKamlesH21"><picture><source media="(max-width: 767px)" srcset="assets/readme/footer-m.svg"><img src="assets/readme/footer.svg" width="100%" alt="Part of Kamlesh OS. More projects on github.com/JustKamlesH21"></picture></a>
 </p>
