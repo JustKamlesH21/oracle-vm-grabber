@@ -1,5 +1,5 @@
 <p align="center">
-  <picture><source media="(max-width: 767px)" srcset="assets/readme/banner-m.svg"><img src="assets/readme/banner.svg" width="100%" alt="Oracle VM Grabber: a GitHub Action that retries the Oracle Cloud Always Free Ampere VM launch every hour until there is capacity."></picture>
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/banner-m.png"><img src="assets/readme/banner.svg" width="100%" alt="Oracle VM Grabber: a GitHub Action that retries the Oracle Cloud Always Free Ampere VM launch every hour until there is capacity."></picture>
 </p>
 
 <p align="center">
@@ -12,13 +12,13 @@ Oracle Cloud's Always Free Ampere VMs are often "out of host capacity", and clic
 No credentials, OCIDs or IP addresses are stored in the repository or printed in the logs.
 
 <p align="center">
-  <picture><source media="(max-width: 767px)" srcset="assets/readme/glance-m.svg"><img src="assets/readme/glance.svg" width="100%" alt="At a glance. Built: Sep 2026; Made for: Getting a free VM to host CTI Verify; Stack: Bash · OCI CLI · GitHub Actions"></picture>
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/glance-m.png"><img src="assets/readme/glance.svg" width="100%" alt="At a glance. Built: Sep 2026; Made for: Getting a free VM to host CTI Verify; Stack: Bash · OCI CLI · GitHub Actions"></picture>
 </p>
 
 ## How it works
 
 <p align="center">
-  <picture><source media="(max-width: 767px)" srcset="assets/readme/how-it-works-m.svg"><img src="assets/readme/how-it-works.svg" width="100%" alt="How it works: an hourly schedule runs grab.sh, which retries for about 54 minutes, 50 to 90 seconds apart, to launch a VM.Standard.A1.Flex with 1 OCPU and 6 GB; on success it opens an issue and disables the workflow."></picture>
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/how-it-works-m.png"><img src="assets/readme/how-it-works.svg" width="100%" alt="How it works: an hourly schedule runs grab.sh, which retries for about 54 minutes, 50 to 90 seconds apart, to launch a VM.Standard.A1.Flex with 1 OCPU and 6 GB; on success it opens an issue and disables the workflow."></picture>
 </p>
 
 | File | What it does |
@@ -31,7 +31,7 @@ Each run writes a one-line summary: still waiting (with the number of attempts),
 ## Architecture
 
 <p align="center">
-  <picture><source media="(max-width: 767px)" srcset="assets/readme/architecture-m.svg"><img src="assets/readme/architecture.svg" width="100%" alt="Architecture. GitHub: Schedule, Secrets; Actions runner: OCI CLI, grab.sh; Oracle Cloud: Subnet + image, A1.Flex VM; on success: Issue opened, Workflow off"></picture>
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/architecture-m.png"><img src="assets/readme/architecture.svg" width="100%" alt="Architecture. GitHub: Schedule, Secrets; Actions runner: OCI CLI, grab.sh; Oracle Cloud: Subnet + image, A1.Flex VM; on success: Issue opened, Workflow off"></picture>
 </p>
 
 ## Use it for your own tenancy
@@ -59,5 +59,5 @@ To change the VM, add `VM_NAME`, `OCPUS` or `MEMORY_GB` to the `env:` of the "Tr
 No license file has been added yet, so default copyright applies.
 
 <p align="center">
-  <a href="https://github.com/JustKamlesH21"><picture><source media="(max-width: 767px)" srcset="assets/readme/footer-m.svg"><img src="assets/readme/footer.svg" width="100%" alt="Part of Kamlesh OS. More projects on github.com/JustKamlesH21"></picture></a>
+  <a href="https://github.com/JustKamlesH21"><picture><source media="(max-width: 767px)" srcset="assets/readme/footer-m.png"><img src="assets/readme/footer.svg" width="100%" alt="Part of Kamlesh OS. More projects on github.com/JustKamlesH21"></picture></a>
 </p>
