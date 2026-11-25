@@ -11,6 +11,10 @@ Oracle Cloud's Always Free Ampere VMs are often "out of host capacity", and clic
 
 No credentials, OCIDs or IP addresses are stored in the repository or printed in the logs.
 
+<p align="center">
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/glance-m.svg"><img src="assets/readme/glance.svg" width="100%" alt="At a glance. Built: Sep 2026; Made for: Getting a free VM to host CTI Verify; Stack: Bash · OCI CLI · GitHub Actions"></picture>
+</p>
+
 ## How it works
 
 <p align="center">
