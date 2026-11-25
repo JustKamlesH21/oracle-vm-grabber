@@ -24,6 +24,12 @@ No credentials, OCIDs or IP addresses are stored in the repository or printed in
 
 Each run writes a one-line summary: still waiting (with the number of attempts), VM created, or the VM already exists.
 
+## Architecture
+
+<p align="center">
+  <picture><source media="(max-width: 767px)" srcset="assets/readme/architecture-m.svg"><img src="assets/readme/architecture.svg" width="100%" alt="Architecture. GitHub: Schedule, Secrets; Actions runner: OCI CLI, grab.sh; Oracle Cloud: Subnet + image, A1.Flex VM; on success: Issue opened, Workflow off"></picture>
+</p>
+
 ## Use it for your own tenancy
 
 1. Fork the repository.
